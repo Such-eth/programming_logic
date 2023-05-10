@@ -9,19 +9,16 @@
  * }
  */
 class Solution {
-    int i=0;
-    ListNode l1=null;
+    int i=0,j=0;
+    ListNode l1=null,l2=null;
     public ListNode swapNodes(ListNode head, int k) {
         i=0;
+        j=0;
         l1=null;
+        l2=null;
         search(head,k);
-        System.out.println(l1.val);
-        ListNode temp=head;
-        for(int i=1;i<k;i++){
-            temp=temp.next;
-        }
-        int dup=temp.val;
-        temp.val=l1.val;
+        int dup=l2.val;
+        l2.val=l1.val;
         l1.val=dup;
         return head;
     }
@@ -29,11 +26,14 @@ class Solution {
         if(node==null){
             return ;
         }
+        j++;
+        if(j==k){
+            l2=node;
+        }
         search(node.next,k);
         i++;
         if(i==k){
             l1=node;
-            return;
         }
     }
 }
