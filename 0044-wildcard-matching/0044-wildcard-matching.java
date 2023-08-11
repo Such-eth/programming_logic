@@ -42,8 +42,8 @@ class Solution {
         }
         if(s2.charAt(j)=='*'){
             // boolean ans=false;
-            // for(int k=0;k<=j;k++){
-            //     ans = ans || match(s1,s2,i-1,j-k);
+            // for(int k=0;k<=i;k++){
+            //     ans = ans || match(s1,s2,i-k,j-1);
             // }
             // dp[i][j]=cast(ans);
             // return val(dp,i,j);
