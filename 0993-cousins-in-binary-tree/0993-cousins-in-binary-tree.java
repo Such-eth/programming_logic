@@ -14,7 +14,6 @@
  * }
  */
 class Solution {
-    public boolean cousin=true;
     public boolean isCousins(TreeNode root, int x, int y) {
         List<List<Integer>> ans = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
@@ -33,22 +32,15 @@ class Solution {
                     queue.offer(curr.left);
                 if(curr.right!=null)
                     queue.offer(curr.right);
-                current.add(curr.val);
+                if(!(curr.left==null || curr.right==null))
+                    if(curr.left.val==x && curr.right.val==y || curr.left.val==y && curr.right.val==x)
+                        return false;
+                    current.add(curr.val);
             }
             if(one^two)
                 return false;
             ans.add(current);
         }
-        check(root,x,y);
-        return cousin;
-    }
-    public void check(TreeNode root, int x, int y){
-        if(root!=null){
-            if(!(root.left==null || root.right==null))
-                if(root.left.val==x && root.right.val==y || root.left.val==y && root.right.val==x)
-                    cousin = false;
-            check(root.left,x,y);
-            check(root.right,x,y);
-        }
+        return true;
     }
 }
