@@ -14,18 +14,28 @@
  * }
  */
 class Solution {
-    static int ans,count;
+    public int count;
     public int kthSmallest(TreeNode root, int k) {
-        ans=0;
-        count=0;
-        helper(root,k); 
-        return ans;
+        count=k;
+        TreeNode ans = find(root); 
+        return ans.val;
     }
-    public void helper(TreeNode root, int k){
-        if(root==null){return;}
-        helper(root.left,k);
-        count++;
-        if(k==count){ans=root.val;}
-        helper(root.right,k);        
+    // public void helper(TreeNode root, int k){
+    //     if(root==null){return;}
+    //     helper(root.left,k);
+    //     count++;
+    //     if(k==count){ans=root.val;}
+    //     helper(root.right,k);        
+    // }
+    public TreeNode find(TreeNode node){
+        if(node==null)
+            return null;
+        TreeNode left = find(node.left);
+        if(left!=null)
+            return left;
+        if(count==1)
+            return node;
+        count=count-1;
+        return find(node.right);
     }
 }
