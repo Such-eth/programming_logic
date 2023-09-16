@@ -14,10 +14,8 @@ class Solution {
     public TreeNode lca(TreeNode node, TreeNode p, TreeNode q){
         if(node==null)
             return null;
-        if(node==p)
-            return p;
-        if(node==q)
-            return q;
+        if(node==p || node==q)
+            return node;
         TreeNode left = lca(node.left,p,q);
         TreeNode right = lca(node.right,p,q);
         if(left!=null && right!=null)
