@@ -14,25 +14,25 @@
  * }
  */
 class Solution {
-    String str;
+    StringBuilder str;
     public String tree2str(TreeNode root) {
-        str = "";
+        str = new StringBuilder();
         traverse(root);
-        return str;
+        return str.toString();
     }
     public void traverse(TreeNode node){
         if(node==null)
             return;
-        str+=String.valueOf(node.val);
+        str.append(String.valueOf(node.val));
         if(node.left==null && node.right==null)
             return;
-        str+="(";
+        str.append("(");
         traverse(node.left);
-        str+=")";
+        str.append(")");
         if(node.right!=null){
-            str+="(";
+            str.append("(");
             traverse(node.right);
-            str+=")";
+            str.append(")");
         }
     }
 }
