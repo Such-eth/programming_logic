@@ -24,37 +24,36 @@
  * }
  */
 class Solution {
-    public List<TreeNode> list;
+    public ListNode Head;
+    public boolean ans;
     public boolean isSubPath(ListNode head, TreeNode root) {
         int val=head.val;
-        list = new ArrayList<>();
+        Head=head;
+        ans=false;
         findNodes(root,val);
-        boolean ans = false;
-        for(TreeNode node: list){
-            ans=ans||check(head,node);
-        }
         return ans;
     }
     public void findNodes(TreeNode node, int val){
         if(node==null)
             return;
+        if(ans==true)
+            return;
+        if(node.val==val){
+            ans=ans||check(Head,node);
+            if(ans)
+                System.out.println(node.val);
+        }
         findNodes(node.left,val);
-        if(node.val==val)
-            list.add(node);
+        
         findNodes(node.right,val);
     }
     public boolean check(ListNode head,TreeNode root){
-        if(head==null && root==null){
+        if(head==null)
             return true;
-        }
-        if(head!=null && root==null)
+        if(root==null)
             return false;
-        if(head==null && root!=null)
-            return true;
-        if(head.val!=root.val)
-            return false;
-        boolean left=check(head.next,root.left);
-        boolean right=check(head.next,root.right);
-        return left||right;
+        if(head.val==root.val)
+            return check(head.next,root.left)||check(head.next,root.right);
+        return false;
     }
 }
