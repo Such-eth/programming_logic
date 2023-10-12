@@ -10,24 +10,28 @@
  */
 class Solution {
     public ListNode insertGreatestCommonDivisors(ListNode head) {
-        ListNode node = head;
-        while(node!=null && node.next!=null){
-            int num = findGdc(node.val,node.next.val);
-            ListNode newNode = new ListNode(num);
-            ListNode nextNode = node.next;
-            node.next = newNode;
-            newNode.next = nextNode;
-            node=node.next.next;
-        }
+            ListNode prevNode = null;
+        ListNode currNode = head;
+
+        while(currNode != null) {
+            if(prevNode != null && currNode != null) {
+                int gcd = greatestCommonDivisor(prevNode.val, currNode.val);
+                ListNode newNode = new ListNode(gcd, currNode);
+                prevNode.next = newNode;
+            }
+
+            prevNode = currNode;
+            currNode = currNode.next;
+        }   
+
         return head;
-        
     }
-    public int findGdc(int num1,int num2){
-        int ans=1;
-        for(int i=Math.min(num1,num2);i>=1;i--){
-            if(num1%i==0 && num2%i==0)
-                return i;
+
+    private int greatestCommonDivisor(int val1, int val2) {
+
+        if(val2 == 0) {
+            return val1;
         }
-        return ans;
+        return greatestCommonDivisor(val2, val1%val2);
     }
 }
