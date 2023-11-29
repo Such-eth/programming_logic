@@ -1,19 +1,19 @@
 class Solution {
-    List<List<Integer>> l=new ArrayList<>();
+    List<List<Integer>> subsets;
     public List<List<Integer>> subsets(int[] nums) {
-        l=new ArrayList<>();
-        List<Integer> l1=new ArrayList<>();
-        helper(nums,0,l1);
-        return l;
+        subsets = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        findSubsets(nums,curr,0);
+        return subsets;
     }
-    public void helper(int[] arr,int i,List<Integer> list){
+    public void findSubsets(int[] arr, List<Integer> curr,int i){
         if(i==arr.length){
-            l.add(new ArrayList(list));
+            subsets.add(new ArrayList<>(curr));
             return;
         }
-        list.add(arr[i]);
-        helper(arr,i+1,list);
-        list.remove(list.size()-1);
-        helper(arr,i+1,list);
+        curr.add(arr[i]);
+        findSubsets(arr,curr,i+1);
+        curr.remove(curr.size()-1);
+        findSubsets(arr,curr,i+1);
     }
 }
