@@ -3,9 +3,15 @@
  * @return {Function} counter
  */
 var createCounter = function(n) {
-    
+    var val=0;
     return function() {
-        return n++;
+        if(val===0){
+            val++;
+            return n;
+        }
+        // val++;
+        return n+val++;
+        
     };
 };
 
