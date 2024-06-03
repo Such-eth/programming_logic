@@ -1,30 +1,28 @@
 class MinStack {
-    
-    ArrayList<Integer> list;
-    PriorityQueue<Integer> q;
-    
+    Stack<Integer> s1,s2;
     public MinStack() {
-        list = new ArrayList<>();
-        q = new PriorityQueue<Integer>();
+        this.s1 = new Stack<>();
+        this.s2 = new Stack<>();
     }
     
     public void push(int val) {
-        list.add(val);
-        q.add(val);
+        s1.push(val);
+        if(s2.isEmpty() || s2.peek()>val)
+            s2.push(val);
+        else s2.push(s2.peek());
     }
     
     public void pop() {
-        System.out.println(list);
-        q.remove(list.get(list.size()-1));
-        list.remove(list.size()-1);
+        s1.pop();
+        s2.pop();
     }
     
     public int top() {
-        return list.get(list.size()-1);
+        return s1.peek();
     }
     
     public int getMin() {
-        return q.peek();
+        return s2.peek();
     }
 }
 
