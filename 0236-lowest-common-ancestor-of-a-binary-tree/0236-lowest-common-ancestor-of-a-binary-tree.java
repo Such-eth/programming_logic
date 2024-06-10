@@ -8,20 +8,30 @@
  * }
  */
 class Solution {
+    TreeNode lca;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return lca(root,p,q);
+        lca = null;
+        traverse(root,p,q);
+        return lca;
     }
-    public TreeNode lca(TreeNode node, TreeNode p, TreeNode q){
-        if(node==null)
-            return null;
-        if(node==p || node==q)
-            return node;
-        TreeNode left = lca(node.left,p,q);
-        TreeNode right = lca(node.right,p,q);
-        if(left!=null && right!=null)
-            return node;
-        if(left==null && right!=null)
-            return right;
-        return left;
+    public int traverse(TreeNode root, TreeNode p, TreeNode q){
+        if(root==null)
+            return 0;
+        int n1 = traverse(root.left,p,q);
+        int n2 = traverse(root.right,p,q);
+        // System.out.println(root.val+" "+n1+" "+n2+" "+lca.val);
+        if(n1==-1 || n2==-1)
+            return -1;
+        if(n1+n2==2){
+            lca = root;
+            return -1;
+        }
+        if((root==p || root==q) && (n1==1 || n2==1)){
+            lca=root;
+            return -1;
+        }
+        if(root==p || root==q)
+            return 1;
+        return n1+n2;
     }
 }
