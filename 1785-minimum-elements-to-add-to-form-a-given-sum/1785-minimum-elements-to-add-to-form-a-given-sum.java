@@ -4,10 +4,6 @@ class Solution {
         for(int i:nums)
             sum+=i;
         long num = goal-sum;
-        System.out.println(num+" "+sum);
-        // if(num<0){
-        //     return Math.abs(num)/limit;
-        // }
         return (int)Math.ceil(Math.abs(num)/(double)limit);
     }
 }
